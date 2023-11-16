@@ -38,6 +38,22 @@ public class App extends JFrame {
         gridLayout3 = new GridLayout(0,3);//panel de abajo
         gridLayout4 = new GridLayout(0,6);//para imprimir los cantidatos
         contenedor.setLayout(gridLayout);
+        //subpanel del panel del medio
+        flowLayout = new FlowLayout();
+        flowLayout2 = new FlowLayout();
+        flowLayout3 = new FlowLayout();
+        //subpanel de panel de abajo
+        flowLayout4 = new FlowLayout();
+        flowLayout5 = new FlowLayout();
+        flowLayout6 = new FlowLayout();
+        //para el panel del medio
+        panel1 = new JPanel(gridLayout2);//panel principal
+        panel2 = new JPanel(flowLayout);
+        panel3 = new JPanel(flowLayout2);
+        panel4 = new JPanel(flowLayout3);
+        panel9 = new JPanel(gridLayout4);//para imprimir todos los candidatos
+        panelIncioActualizar = new JPanel(flowLayout);
+
     }
     
 }

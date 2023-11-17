@@ -2,11 +2,11 @@ public enum Ciudades {
     Cali, 
     Buenaventura, 
     Palmira,
-    Tuluá,
+    Tulua,
     Buga,
     Cartago,
     Yumbo,
-    Jamundí,
+    Jamundi,
     Dagua,
     LaCumbre,
     Zarzal,
@@ -16,7 +16,7 @@ public enum Ciudades {
     Caicedonia,
     Roldanillo,
     Trujillo,
-    Andalucía,
+    Andalucia,
     Versalles,
 }
 

@@ -10,6 +10,18 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+import java.awt.Container;
+import java.awt.FlowLayout;
+import java.awt.GradientPaint;
+import java.awt.GridLayout;
+import java.awt.Label;
+import java.awt.Panel;
+import java.awt.ScrollPane;
+import java.util.ArrayList;
+import java.util.List;
 
 
 public class App extends JFrame {

@@ -856,24 +856,93 @@ public class App extends JFrame {
                 
                 JLabel favor = new JLabel("Si desea actualizar votos favor volver a dar en el menu SALIR CRUD");
                 panel5.add(favor);
- 
                 panel4.add(panel5);
                 contenedor.add(panel4);
                 contenedor.repaint();
                 contenedor.revalidate();
                 
-                
-
-
-
-                contenedor.repaint();
-                contenedor.revalidate();
+               
             }
             
         
         });
-        
+        // Agregar los elementos al menú
+        fileMenu.add(MenuItem);
+        menuBar.add(fileMenu);
 
+        fileMenu2.add(MenuItem2);
+        fileMenu2.add(MenuItem3);
+        fileMenu2.add(MenuItem4);
+        menuBar.add(fileMenu2);
+
+        fileMenu3.add(MenuItem5);
+        fileMenu3.add(MenuItem6);
+        menuBar.add(fileMenu3);
+
+        fileMenu4.add(MenuItem7);
+        menuBar.add(fileMenu4);
+
+        // Establecer la barra de menú en la ventana
+        setJMenuBar(menuBar);
+        
+        setTitle("Ejemplo de Menú");
+        setSize(1200, 700);
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setVisible(true);
     }
+    private void recorrerCiudades(){
+        Ciudades[] ciudades = Ciudades.values();
+        byte num = 1;
+        for (Ciudades ciudades2 : ciudades) {
+
+            JTextArea area = new JTextArea("                 "+num + ". "+ ciudades2);
+            panel6.add(area);
+            num+=1;
+        }
+    }
+    private void recorrerPartidos(){
+        PartidosPoliticos[] partidos = PartidosPoliticos.values();
+        byte num = 1;
+        for (PartidosPoliticos partidos2 : partidos) {
+
+            JTextArea area2 = new JTextArea("                 "+num + "."+ partidos2 + "             ");
+            panel7.add(area2);
+            num+=1;
+        }
+    }
+    private void recorrerPromesas(){
+        Promesas[] promesas = Promesas.values();
+        byte num = 1;
+        for (Promesas promesas2 : promesas) {
+
+            JTextArea area3 = new JTextArea("                            "+num + "."+ promesas2 + "             ");
+            panel8.add(area3);
+            num+=1;
+        }
+    }
+
+    private void limpiarContenedor() {
+        contenedor.removeAll();
+        panelIncioActualizar.removeAll();
+        panel1.removeAll();
+        panel2.removeAll();
+        panel3.removeAll();
+        panel4.removeAll();
+        panel5.removeAll();
+        panel6.removeAll();
+        panel7.removeAll();
+        panel8.removeAll();
+        panel9.removeAll();
+        contenedor.setLayout(gridLayout);
+        setSize(1200, 700);
+    }
+     
     
+    
+    public static void main(String[] args) {    
+                App app = new App();
+                
+            
+    }
+
 }

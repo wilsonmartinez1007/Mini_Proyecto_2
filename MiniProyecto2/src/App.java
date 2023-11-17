@@ -36,7 +36,7 @@ public class App extends JFrame {
     List<Candidato> miLista = new ArrayList<>();
     int numero = 0;
     int[] listaCantPartidos = {0,0,0,0,0,0,0,0,0,0,0};
-
+    boolean ciudadEncontrada = false;
     
     int i= 0;
     
@@ -182,16 +182,27 @@ public class App extends JFrame {
                         try{
                             if(textField .getText().isEmpty() ||  textField2 .getText().isEmpty() || textField3 .getText().isEmpty()|| textField4 .getText().isEmpty()||
                             textField5 .getText().isEmpty()|| textField6 .getText().isEmpty()||textField6_2.getText().isEmpty()){
-                                throw new CandidatoExcepcion("Alguna o todas las casilla estan vacias...");}
-                            System.out.println("nombre: "+textField.getText());
+                                throw new UnivalleException("Alguna o todas las casilla estan vacias...");}
                             String nombre = textField.getText();
-
                             String cedula = textField2.getText();
                             try{
                                 Integer.parseInt(cedula);
                                 
                                 }catch(NumberFormatException  ex){
                                     JOptionPane.showMessageDialog(contenedor, "Solo se permiten numero en la cedula");
+                                    return;
+                            }
+                            //corrovorar cedula ya registrada
+                            try{
+                                for (Candidato candidato2 : miLista) {
+                                    if(candidato2.getCedula().equals(cedula)){
+                                        throw new UnivalleException("La cedula dijitada ya se encuentra en el registro");
+                                    }
+                                }
+                                
+                                }catch(UnivalleException  ex){
+                                    String mensaje = ex.getMessage();
+                                    JOptionPane.showMessageDialog(contenedor, mensaje);
                                     return;
                             }
 
@@ -218,18 +229,16 @@ public class App extends JFrame {
                                     JOptionPane.showMessageDialog(contenedor, mensaje);
                                     return;
                                 }
-                            
-
 
                             boolean decision = false ;
                             try{
                                 if(textField4.getText().equals("derecha") || textField4.getText().equals("izquierda")){
                                     //bien
                                 }else{
-                                    throw new CandidatoExcepcion("Error..verifique que su eleccion sea igual a dercha o izquierda(todo minusculas)");
+                                    throw new UnivalleException("Error..verifique que su eleccion sea igual a dercha o izquierda(todo minusculas)");
                                 }
 
-                            }catch(CandidatoExcepcion ex){
+                            }catch(UnivalleException ex){
                                 String mensaje = ex.getMessage();
                                 JOptionPane.showMessageDialog(contenedor, mensaje);return;
                                 }                   
@@ -288,12 +297,11 @@ public class App extends JFrame {
                         
                             miLista.add(numero, nuevoCandidato);
                             numero +=1;
-                            }catch(CandidatoExcepcion ex){
+                            }catch(UnivalleException ex){
                             String mensaje = ex.getMessage();
                             JOptionPane.showMessageDialog(contenedor, mensaje);
                         return;}
                         
-//Para volverlo a subir lo borra porfa
                     
                     }
                     

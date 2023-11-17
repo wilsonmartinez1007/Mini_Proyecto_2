@@ -88,6 +88,220 @@ public class App extends JFrame {
         JMenuItem MenuItem6 = new JMenuItem("Mostrar Candidatos");
         JMenu fileMenu4 = new JMenu("Salir CRUD");
         JMenuItem MenuItem7 = new JMenuItem("Salir del CRUD");
+        // Agregar un ActionListener al elemento del menú "Salir"
+        MenuItem.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                System.exit(0);
+            }
+        });
+        
+        MenuItem2.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                ciudadEncontrada = false;
+                limpiarContenedor();
+                etiqueta3 = new JLabel("-             Menu Crear Candidatos:   -");
+                contenedor.add(etiqueta3);
+                
+                JLabel label = new JLabel("Nombre: ");
+                textField = new JTextField(8);
+                JLabel label2 = new JLabel("Cedula: ");
+                JTextField textField2 = new JTextField(8);
+                button = new JButton("CREAR CANDIDATO");
+                panel2.add(label);
+                panel2.add(textField);
+                panel2.add(label2);
+                panel2.add(textField2);
+                panel2.add(button);
+                panel1.add(panel2);
+
+                JLabel label3 = new JLabel("Ciudad: ");
+                textField3 = new JTextField(8);
+                JLabel label4 = new JLabel("Derecha o Izquierda: ");
+                JTextField textField4 = new JTextField(8);
+                //button2 = new JButton("SEGURO");
+                panel3.add(label3);
+                panel3.add(textField3);
+                panel3.add(label4);
+                panel3.add(textField4);
+                //panel3.add(button2);
+                panel1.add(panel3);
+
+                JLabel label6_3 = new JLabel("Casillas Partido, Promesa 1 y 2 favor con numero  ");
+                JLabel label5 = new JLabel("         Partido Politico: ");
+                textField5 = new JTextField(10);
+                JLabel label6 = new JLabel("                             Promesa1: ");
+                JTextField textField6 = new JTextField(10);
+                JLabel label6_2 = new JLabel("                                 Promesa2: ");
+                JTextField textField6_2 = new JTextField(10);
+                panel4.add(label5);
+                panel4.add(textField5);
+                panel4.add(label6);
+                panel4.add(textField6);
+                panel4.add(label6_2);
+                panel4.add(textField6_2);
+                panel4.add(label6_3);
+                panel1.add(panel4);
+
+
+                contenedor.add(panel1);
+
+                JLabel label7 = new JLabel("                                                     CIUDADES:                                ");
+                panel6.add(label7);
+                recorrerCiudades();
+                
+                JLabel label8 = new JLabel("                           PARTIDOS:                 ");
+                panel7.add(label8);
+                recorrerPartidos();
+
+                JLabel label9 = new JLabel("                 PROMESAS: ");
+                panel8.add(label9);
+                recorrerPromesas();
+
+
+                panel5.add(panel6);
+                panel5.add(panel7);
+                panel5.add(panel8);
+
+                contenedor.add(panel5);
+
+
+                contenedor.repaint();
+                contenedor.revalidate();
+                
+                
+                
+                
+                button.addActionListener(new ActionListener() {
+                    
+                    
+                    @Override
+                    public void actionPerformed(ActionEvent e) {
+                        
+                        try{
+                            if(textField .getText().isEmpty() ||  textField2 .getText().isEmpty() || textField3 .getText().isEmpty()|| textField4 .getText().isEmpty()||
+                            textField5 .getText().isEmpty()|| textField6 .getText().isEmpty()||textField6_2.getText().isEmpty()){
+                                throw new CandidatoExcepcion("Alguna o todas las casilla estan vacias...");}
+                            System.out.println("nombre: "+textField.getText());
+                            String nombre = textField.getText();
+
+                            String cedula = textField2.getText();
+                            try{
+                                Integer.parseInt(cedula);
+                                
+                                }catch(NumberFormatException  ex){
+                                    JOptionPane.showMessageDialog(contenedor, "Solo se permiten numero en la cedula");
+                                    return;
+                            }
+
+                            String ciudad = ""; 
+                            Ciudades lestCiudades[] = Ciudades.values();
+
+                            
+                            //Ciudad
+                            try{
+                            for (int i = 0; i < lestCiudades.length; i++) {
+                                String corrovorarCiudad = lestCiudades[i].toString();
+                                
+                                if(textField3.getText().equals(corrovorarCiudad)){
+                                    ciudad = textField3.getText();
+                                    ciudadEncontrada = true;
+                                    }
+                                                                    
+                                }
+                                if (!ciudadEncontrada) {
+                                    throw new UnivalleException("Error... Favor verificar que el nombre de la ciudad sea igual al de la lista.");
+                                }
+                            }catch(CandidatoExcepcion ex){
+                                    String mensaje = ex.getMessage();
+                                    JOptionPane.showMessageDialog(contenedor, mensaje);
+                                    return;
+                                }
+                            
+
+
+                            boolean decision = false ;
+                            try{
+                                if(textField4.getText().equals("derecha") || textField4.getText().equals("izquierda")){
+                                    //bien
+                                }else{
+                                    throw new CandidatoExcepcion("Error..verifique que su eleccion sea igual a dercha o izquierda(todo minusculas)");
+                                }
+
+                            }catch(CandidatoExcepcion ex){
+                                String mensaje = ex.getMessage();
+                                JOptionPane.showMessageDialog(contenedor, mensaje);return;
+                                }                   
+                            //Derecha o izquierda
+                            if(textField4.getText().equals("derecha")){
+                                decision = true;}else if(textField4.getText().equals("izquierda")){decision=false;}
+                            
+                            PartidosPoliticos partido = PartidosPoliticos.Aico;
+                            PartidosPoliticos partidosPoliticos[] = PartidosPoliticos.values();
+                            //PartidoPolitico
+                            int numPromesa=0;
+                            int numPartido=0;
+                            int numPromesa2=0;
+                            try{
+                                numPartido = Integer.parseInt(textField5.getText());
+                                numPromesa = Integer.parseInt(textField6.getText());
+                                numPromesa2 = Integer.parseInt(textField6_2.getText());
+                                if(1 > numPartido || numPartido > 11 || 1 > numPromesa || numPromesa > 7 ||1 > numPromesa2 || numPromesa2 >7 ){
+                                    throw new CandidatoExcepcion("Error, posicion no encontrada en PartidoP o alguna de las promesas");
+                                }
+                                
+                                }catch(NumberFormatException ex){
+                                    JOptionPane.showMessageDialog(contenedor, "Solo se permiten numeros en las casilla de partido y promesas");
+                                    return;
+                                }catch(CandidatoExcepcion ex){
+                                    String mensaje = ex.getMessage();
+                                    JOptionPane.showMessageDialog(contenedor,mensaje);
+                                    return;
+                                }
+                            for (int j = 0; j < partidosPoliticos.length; j++) {
+                                if (partidosPoliticos[numPartido-1] == partidosPoliticos[j]) {
+                                    partido = partidosPoliticos[j];
+                                    listaCantPartidos[j] +=1;
+                                }
+                            }
+                            //Promesas 1 y 2
+                            Promesas promesa = Promesas.Aumento_seguridad;
+                            Promesas promesa2 = Promesas.Aumento_seguridad;
+                            Promesas lestpromesas[] = Promesas.values();
+                            //Promesa1
+                            
+                            
+                            for (int k = 0; k < lestpromesas.length; k++) {
+                                if (lestpromesas[numPromesa-1] == lestpromesas[k]) {
+                                    promesa = lestpromesas[k];
+                                }
+                            }
+                            //Promesa2
+                            
+                            for (int k = 0; k < lestpromesas.length; k++) {
+                                if (lestpromesas[numPromesa2-1] == lestpromesas[k]) {
+                                    promesa2 = lestpromesas[k];
+                                }
+                            }Candidato nuevoCandidato = new Candidato(nombre, cedula,ciudad, decision, partido, promesa, promesa2);
+                        
+                        
+                            miLista.add(numero, nuevoCandidato);
+                            numero +=1;
+                            }catch(CandidatoExcepcion ex){
+                            String mensaje = ex.getMessage();
+                            JOptionPane.showMessageDialog(contenedor, mensaje);
+                        return;}
+                        
+
+                    
+                    }
+                    
+                });
+                
+                
+            }
+        });
     }
     
 }

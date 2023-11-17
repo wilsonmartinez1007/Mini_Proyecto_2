@@ -210,7 +210,6 @@ public class App extends JFrame {
 
                             
                             //Ciudad
-                            try{
                             for (int i = 0; i < lestCiudades.length; i++) {
                                 String corrovorarCiudad = lestCiudades[i].toString();
                                 
@@ -220,10 +219,11 @@ public class App extends JFrame {
                                     }
                                                                     
                                 }
-                                if (!ciudadEncontrada) {
+                            try{
+                                if(!ciudadEncontrada) {
                                     throw new UnivalleException("Error... Favor verificar que el nombre de la ciudad sea igual al de la lista.");
                                 }
-                            }catch(CandidatoExcepcion ex){
+                            }catch(UnivalleException ex){
                                     String mensaje = ex.getMessage();
                                     JOptionPane.showMessageDialog(contenedor, mensaje);
                                     return;
@@ -256,13 +256,13 @@ public class App extends JFrame {
                                 numPromesa = Integer.parseInt(textField6.getText());
                                 numPromesa2 = Integer.parseInt(textField6_2.getText());
                                 if(1 > numPartido || numPartido > 11 || 1 > numPromesa || numPromesa > 7 ||1 > numPromesa2 || numPromesa2 >7 ){
-                                    throw new CandidatoExcepcion("Error, posicion no encontrada en PartidoP o alguna de las promesas");
+                                    throw new UnivalleException("Error, posicion no encontrada en PartidoP o alguna de las promesas");
                                 }
                                 
                                 }catch(NumberFormatException ex){
                                     JOptionPane.showMessageDialog(contenedor, "Solo se permiten numeros en las casilla de partido y promesas");
                                     return;
-                                }catch(CandidatoExcepcion ex){
+                                }catch(UnivalleException ex){
                                     String mensaje = ex.getMessage();
                                     JOptionPane.showMessageDialog(contenedor,mensaje);
                                     return;
@@ -532,7 +532,7 @@ public class App extends JFrame {
                     });
                     
             }
-        })
+        });
         //aqui
         MenuItem4.addActionListener(new ActionListener() {
 

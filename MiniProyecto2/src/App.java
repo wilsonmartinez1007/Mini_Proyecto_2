@@ -293,7 +293,7 @@ public class App extends JFrame {
                             JOptionPane.showMessageDialog(contenedor, mensaje);
                         return;}
                         
-
+//Para volverlo a subir lo borra porfa
                     
                     }
                     

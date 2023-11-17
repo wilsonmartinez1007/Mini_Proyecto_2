@@ -12,7 +12,6 @@ import javax.swing.JTextField;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-
 import java.awt.Container;
 import java.awt.FlowLayout;
 import java.awt.GradientPaint;
@@ -534,6 +533,347 @@ public class App extends JFrame {
                     
             }
         })
+        //aqui
+        MenuItem4.addActionListener(new ActionListener() {
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                limpiarContenedor();
+                setSize(1600, 700);
+                etiqueta3 = new JLabel("-             Menu Eliminar Candidatos:   -");
+                contenedor.add(etiqueta3);
+                JLabel label2 = new JLabel("Favor dijite la Cedula del candidato a eliminar: ");
+                JTextField textField2 = new JTextField(8);
+                JLabel labelCedula= new JLabel("             ");
+                button2 = new JButton("Eliminar Candidato");
+                panel2.add(label2);
+                panel2.add(textField2);
+                panel2.add(button2);
+                panel1.add(labelCedula);
+                panel1.add(panel2);
+                contenedor.add(panel1);
+                button2.addActionListener(new ActionListener() {
+
+                    @Override
+                    public void actionPerformed(ActionEvent e) {
+                       int size = miLista.size();
+                       boolean comprobarCedula = false;
+                       try{if(textField2.getText().isEmpty()){
+                            throw new UnivalleException("La casilla esta vacia");
+                        }else{
+                    
+                        for (int j = size-1; j >= 0; j--) { 
+                            Candidato candidato = miLista.get(j);//aqui aparece error
+                            if(candidato.getCedula().equals(textField2.getText())){
+                                miLista.remove(j);
+                                comprobarCedula = true;
+                                JOptionPane.showMessageDialog(contenedor, "Se a borrado con exito el Candidato");
+                                numero-=1;
+                            }
+                        }if (comprobarCedula == false ) {
+                            JOptionPane.showMessageDialog(contenedor, "No se a encontrado al Candidato favor verifique la cedula");
+                            }
+                            }
+                        }catch(UnivalleException ex){
+                            String mensaje = ex.getMessage();
+                            JOptionPane.showMessageDialog(contenedor,mensaje);
+                        }
+                            
+                        
+                    }
+                    
+                });
+
+                
+                String name = "";
+                String ciudad = "";
+                String cedula = "";
+                String derecha2 = "";  
+                String partido = "";
+                String promesa = "";
+                for (Candidato candidato : miLista) {
+                    name +=  "\n" + candidato.getNombre();
+                    ciudad += "\n" + candidato.getCiudad();
+                    cedula += "\n" + candidato.getCedula();
+                    if(candidato.isDerecha() == true){derecha2 += "\nderecha";}else{derecha2 += "\nIzquierda";}
+                    partido += "\n" + candidato.getPartidoPolitico();
+                    promesa += "\n" + candidato.getPromesa()+" - " + candidato.getPromesa2();
+                }
+                //columna 1
+                JTextArea area = new JTextArea("Nombres:  " + name );
+                //columna 2
+                JTextArea area2 = new JTextArea("Ciudades:  " +  ciudad);
+                //Columna 3
+                JTextArea area3 = new JTextArea("Cedula:  " +  cedula);
+                //Columna 4
+                JTextArea area4 = new JTextArea("Posicion:  " +  derecha2);
+                //Columna 5
+                JTextArea area5 = new JTextArea("Partido Politico:  " +  partido);
+                //Columna 6
+                JTextArea area6 = new JTextArea("Promesas:  " +  promesa);
+                
+
+                //scrollPane = new JScrollPane(area);
+                panel9.add(area);
+                panel9.add(area2);
+                panel9.add(area3);
+                panel9.add(area4);
+                panel9.add(area5);
+                panel9.add(area6);
+                contenedor.add(panel9);
+
+                contenedor.repaint();
+                contenedor.revalidate();
+            }
+            
+        });
+        MenuItem5.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                limpiarContenedor();
+                setSize(650, 500);
+                etiqueta3 = new JLabel("-             Menu Buscar Candidatos:   -");
+                contenedor.add(etiqueta3);
+                JLabel label2 = new JLabel("                  Cedula: ");
+                JTextField textField2 = new JTextField(8);
+                JLabel labelCedula= new JLabel("             ");
+                button2 = new JButton("Buscar CANDIDATO");
+                panel2.add(label2);
+                panel2.add(textField2);
+                panel2.add(labelCedula);
+                panel2.add(button2);
+                panel1.add(panel2);
+
+
+
+                contenedor.add(panel1);
+                contenedor.repaint();
+                contenedor.revalidate();
+
+                button2.addActionListener(new ActionListener() {
+                    @Override
+                    public void actionPerformed(ActionEvent e) {
+                        String derecha2;  
+                        int i =0;
+                        try{
+                            if(textField2.getText().isEmpty()|| miLista.size() == 0){
+                                throw new UnivalleException("Aun no se an registrado Candidatos o el area esta vacia");
+                            }
+                            for (Candidato compararCandidato : miLista) {
+                                if (compararCandidato.getCedula().equals(textField2.getText())) {
+                                    Candidato candidato = miLista.get(i);
+                                    if(candidato.isDerecha() == true){
+                                    derecha2 = "derecha";}else{derecha2 = "Izquierda";}
+                                    JOptionPane.showMessageDialog(contenedor, "Nombre: " +  candidato.getNombre() +"\nCiudad: "
+                                    + candidato.getCiudad() +  "\nCedula: " + candidato.getCedula() + "\nPosiciion: " +
+                                    derecha2 + "\nPartido Politico: " +  candidato.getPartidoPolitico() + "\nPromesa1: " + candidato.getPromesa()
+                                    + "\nPromesa2: " + candidato.getPromesa2(), "Informazao", 0, null);
+                                }else{
+                                    JOptionPane.showMessageDialog(contenedor, "La cedula dijitada no se encuentra en el registro");
+                                }
+                                i+=1;
+                                }}catch(UnivalleException ex){
+                                    String mensaje = ex.getMessage();
+                                    JOptionPane.showMessageDialog(contenedor,mensaje);
+
+                                            }
+                        
+                                    }
+                        });
+                
+                
+                }
+        });
+        MenuItem6.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                limpiarContenedor();
+               
+                etiqueta3 = new JLabel("-             Menu Mostrar todos los candidatos   -");
+                JButton button3 = new JButton("MOSTRAR CANDIDATOS");
+                panel2.add(etiqueta3);
+                panel2.add(button3);
+                contenedor.add(panel2);
+
+                button3.addActionListener(new ActionListener() {
+
+                    @Override
+                    public void actionPerformed(ActionEvent e) {
+                        button3.setEnabled(false);
+                        setSize(1600, 700);
+                        String name = "";
+                        String ciudad = "";
+                        String cedula = "";
+                        String derecha2 = "";  
+                        String partido = "";
+                        String promesa = "";
+                        for (Candidato candidato : miLista) {
+                            name +=  "\n" + candidato.getNombre();
+                            ciudad += "\n" + candidato.getCiudad();
+                            cedula += "\n" + candidato.getCedula();
+                            if(candidato.isDerecha() == true){derecha2 += "\nderecha";}else{derecha2 += "\nIzquierda";}
+                            partido += "\n" + candidato.getPartidoPolitico();
+                            promesa += "\n" + candidato.getPromesa()+" - " + candidato.getPromesa2();
+                        }
+                        //columna 1
+                        JTextArea area = new JTextArea("Nombres:  " + name );
+                        scroll = new JScrollPane(area);
+                        //columna 2
+                        JTextArea area2 = new JTextArea("Ciudades:  " +  ciudad);
+                        scroll2 = new JScrollPane(area2);
+                        //Columna 3
+                        JTextArea area3 = new JTextArea("Cedula:  " +  cedula);
+                        scroll3 = new JScrollPane(area3);
+                        //Columna 4
+                        JTextArea area4 = new JTextArea("Posicion:  " +  derecha2);
+                        scroll4 = new JScrollPane(area4);
+                        //Columna 5
+                        JTextArea area5 = new JTextArea("Partido Politico:  " +  partido);
+                        scroll5 = new JScrollPane(area5);
+                        //Columna 6
+                        JTextArea area6 = new JTextArea("Promesas:  " +  promesa);
+                        scroll6 = new JScrollPane(area6);
+                        
+
+                        //scrollPane = new JScrollPane(area);
+                        panel9.add(scroll);
+                        panel9.add(scroll2);
+                        panel9.add(scroll3);
+                        panel9.add(scroll4);
+                        panel9.add(scroll5);
+                        panel9.add(scroll6);
+                        contenedor.add(panel9);
+                        contenedor.repaint();
+                        contenedor.revalidate();
+
+
+                        }
+                    
+                });
+
+                
+                
+
+                contenedor.repaint();
+                contenedor.revalidate();
+            }
+        });
+        MenuItem7.addActionListener(new ActionListener() {
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                limpiarContenedor();
+                
+                setSize(2000, 500);
+                etiqueta3 = new JLabel("-             Menu votacion Candidatos:   -");
+                JLabel etiquetaespacion = new JLabel("                                                                                                               ");
+                JLabel etiqueta4 = new JLabel("             Dijite los votos de cada candidato:    ");
+                JLabel etiquetaespacion2 = new JLabel("                                     ");
+                JButton guardar = new JButton("Finalizar votacion");
+                JButton finalizar = new JButton("Mostar Resultados");
+                panel1.add(etiqueta3);
+                panel3.add(etiquetaespacion);
+                panel3.add(etiqueta4);
+                panel3.add(etiquetaespacion2);
+        
+                panel3.add(guardar);
+                panel3.add(finalizar);
+                panel1.add(panel3);
+                contenedor.add(panel1);
+                List<String> votoList = new ArrayList<>();
+                List<String> votoCorrec = new ArrayList<>();
+                
+                
+                
+                
+                for (Candidato candidato : miLista) {
+                    
+                    JLabel votos = new JLabel(candidato.getNombre());
+                    JTextField voTextField = new JTextField(8);
+                    panel2.add(votos);
+                    panel2.add(voTextField);
+                    guardar.addActionListener(new ActionListener() {
+
+                        @Override
+                        public void actionPerformed(ActionEvent e) {
+                            guardar.setEnabled(false);
+                            votoList.add(i,voTextField.getText());
+                            i+=1;
+                        }
+                        
+                                    });
+                    
+                    contenedor.add(panel2);
+                }
+                
+                
+
+                    
+
+                
+                finalizar.addActionListener(new ActionListener() {
+
+                    @Override
+                    public void actionPerformed(ActionEvent e) {
+                        i = 0;
+                        for(int c = votoList.size()-1; c  >= 0; c--){
+                            votoCorrec.add(votoList.get(c));
+                        }
+                    
+                        
+                        int valorMayor = Integer.parseInt(votoCorrec.get(0));
+                        int posGanador = 0;
+                        for (String string : votoCorrec) {
+                            System.out.println("Los votos ordenados son: "+string);
+                        }
+                        
+                        for(int v = 0; v < votoCorrec.size(); v++){
+                            int vaorIngre = Integer.parseInt(votoCorrec.get(v));
+                            if(vaorIngre > valorMayor){
+                                valorMayor = vaorIngre;
+                                posGanador = v;
+                            }
+                        }
+                        int posG = 0;
+                        int partisoMyor = listaCantPartidos[0];
+                        for(int j=0;j<listaCantPartidos.length;j++){
+                        if(listaCantPartidos[j]>partisoMyor){
+                            partisoMyor = listaCantPartidos[j];
+                            posG = j;
+                                    }
+                                }
+                        PartidosPoliticos partido[] = PartidosPoliticos.values();
+                        Candidato candidatoGanador = miLista.get(posGanador);
+                        JOptionPane.showMessageDialog(contenedor, "Nombre: " + candidatoGanador.getNombre() +
+                        "\nCedula: " + candidatoGanador.getCedula() + "\nSus propuesta son: " + candidatoGanador.getPromesa() + 
+                        ","+candidatoGanador.getPromesa2() +  "\nCantidad de votos: " + valorMayor + "\nPartido con mayor numero de candidatos: " 
+                        + partido[posG], "CANDIDATO GANADOR", 0 );
+                        
+                    }
+                    
+                });
+                
+                
+                JLabel favor = new JLabel("Si desea actualizar votos favor volver a dar en el menu SALIR CRUD");
+                panel5.add(favor);
+ 
+                panel4.add(panel5);
+                contenedor.add(panel4);
+                contenedor.repaint();
+                contenedor.revalidate();
+                
+                
+
+
+
+                contenedor.repaint();
+                contenedor.revalidate();
+            }
+            
+        
+        });
+        
+
     }
     
 }

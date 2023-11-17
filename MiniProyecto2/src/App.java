@@ -8,7 +8,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
-
+import javax.swing.JTextField;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -44,28 +44,50 @@ public class App extends JFrame {
     
     public App() {
 
-        contenedor = getContentPane();
-        gridLayout = new GridLayout(3,0);
-        gridLayout2 = new GridLayout(0,3);//panel del medio
-        gridLayout3 = new GridLayout(0,3);//panel de abajo
-        gridLayout4 = new GridLayout(0,6);//para imprimir los cantidatos
-        contenedor.setLayout(gridLayout);
+        this.contenedor = this.getContentPane();
+        this.gridLayout = new GridLayout(3,0);
+        this.gridLayout2 = new GridLayout(0,3);//panel del medio
+        this.gridLayout3 = new GridLayout(0,3);//panel de abajo
+        this.gridLayout4 = new GridLayout(0,6);//para imprimir los cantidatos
+        this.contenedor.setLayout(this.gridLayout);
         //subpanel del panel del medio
-        flowLayout = new FlowLayout();
-        flowLayout2 = new FlowLayout();
-        flowLayout3 = new FlowLayout();
+        this.flowLayout = new FlowLayout();
+        this.flowLayout2 = new FlowLayout();
+        this.flowLayout3 = new FlowLayout();
         //subpanel de panel de abajo
-        flowLayout4 = new FlowLayout();
-        flowLayout5 = new FlowLayout();
-        flowLayout6 = new FlowLayout();
+        this.flowLayout4 = new FlowLayout();
+        this.flowLayout5 = new FlowLayout();
+        this.flowLayout6 = new FlowLayout();
         //para el panel del medio
-        panel1 = new JPanel(gridLayout2);//panel principal
-        panel2 = new JPanel(flowLayout);
-        panel3 = new JPanel(flowLayout2);
-        panel4 = new JPanel(flowLayout3);
-        panel9 = new JPanel(gridLayout4);//para imprimir todos los candidatos
-        panelIncioActualizar = new JPanel(flowLayout);
+        this.panel1 = new JPanel(this.gridLayout2);//panel principal
+        this.panel2 = new JPanel(this.flowLayout);
+        this.panel3 = new JPanel(this.flowLayout2);
+        this.panel4 = new JPanel(this.flowLayout3);
+        this.panel9 = new JPanel(this.gridLayout4);//para imprimir todos los candidatos
+        this.panelIncioActualizar = new JPanel(this.flowLayout);
+        //para el panel de abajo
+        this.panel5 = new JPanel(this.gridLayout3);//panel principal
+        this.panel6 = new JPanel(this.flowLayout4);
+        this.panel7 = new JPanel(this.flowLayout5);
+        this.panel8 = new JPanel(this.flowLayout5);
+        
+        // Configurar la ventana
 
+        // Crear la barra de menú
+        JMenuBar menuBar = new JMenuBar();
+
+        // Crear los elementos del menú
+        JMenu fileMenu = new JMenu("Inicio");
+        JMenuItem MenuItem = new JMenuItem("Salir");
+        JMenu fileMenu2 = new JMenu("Candidatos");
+        JMenuItem MenuItem2 = new JMenuItem("Crear Candidatos");
+        JMenuItem MenuItem3 = new JMenuItem("Actualizar Candidatos");
+        JMenuItem MenuItem4 = new JMenuItem("Eliminar Candidato");
+        JMenu fileMenu3 = new JMenu("Informacion Candidatos");
+        JMenuItem MenuItem5 = new JMenuItem("Buscar Candidatos");
+        JMenuItem MenuItem6 = new JMenuItem("Mostrar Candidatos");
+        JMenu fileMenu4 = new JMenu("Salir CRUD");
+        JMenuItem MenuItem7 = new JMenuItem("Salir del CRUD");
     }
     
 }

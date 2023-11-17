@@ -302,6 +302,230 @@ public class App extends JFrame {
                 
             }
         });
+        MenuItem3.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                JButton button3;
+                
+                limpiarContenedor();
+                etiqueta3 = new JLabel("-             Menu Actualizar Candidatos:   -");
+                JLabel labelespacion = new JLabel("                                                                                                                                                                                                                                                                                                      ");
+                JLabel label12 = new JLabel("Cedula del cantididato a actualizar: ");
+                JTextField textField12 = new JTextField(8);
+                button = new JButton("Enviar Solicitud");
+                panelIncioActualizar.add(etiqueta3);
+                panelIncioActualizar.add(labelespacion);
+                panelIncioActualizar.add(label12);
+                panelIncioActualizar.add(textField12); 
+                panelIncioActualizar.add(button);
+                contenedor.add(panelIncioActualizar);
+                 
+
+                
+                JLabel label = new JLabel("Nombre: ");
+                textField = new JTextField(8);
+                panel2.add(label);
+                panel2.add(textField);
+                panel1.add(panel2);
+
+                JLabel label3 = new JLabel("Ciudad: ");
+                textField3 = new JTextField(8);
+                JLabel label4 = new JLabel("Derecha o Izquierda: ");
+                JTextField textField4 = new JTextField(8);
+                button3 = new JButton("ACTUALIZAR CANDIDATO");
+                button3.setEnabled(false);
+
+                panel3.add(label3);
+                panel3.add(textField3);
+                panel3.add(label4);
+                panel3.add(textField4);
+                panel3.add(button3);
+                panel1.add(panel3);
+
+                button.addActionListener(new ActionListener() {
+
+                    @Override
+                    public void actionPerformed(ActionEvent e) {
+                        if(miLista.size() == 0 || textField12.getText().isEmpty()){
+                            JOptionPane.showMessageDialog(contenedor, "Aun no se an registrado Candidatos o la casilla esta vacia");
+                        }else{
+                        boolean comprobarCedula = false;
+                        for (Candidato candidato : miLista) {
+                            if(candidato.getCedula().equals(textField12.getText())){
+                                button3.setEnabled(true);
+                                JOptionPane.showMessageDialog(contenedor, "Se a encontrado la cedula con exito puede actualizar sus siguientes opciones");
+                                comprobarCedula = true;
+                            }
+
+                            }if(comprobarCedula == false){
+                            JOptionPane.showMessageDialog(contenedor,"No se a encontrado la Cedula buscada, favor revise si se dijito bien y vuelva a intentarlo");
+                        }
+                    }
+
+                    }
+                   
+                    
+                });
+                JLabel label6_3 = new JLabel("Casillas Partido, Promesa 1 y 2 favor con numero  ");
+                JLabel label5 = new JLabel("         Partido Politico: ");
+                textField5 = new JTextField(10);
+                JLabel label6 = new JLabel("                             Promesa1: ");
+                JTextField textField6 = new JTextField(10);
+                JLabel label6_2 = new JLabel("                                 Promesa2: ");
+                JTextField textField6_2 = new JTextField(10);
+                panel4.add(label5);
+                panel4.add(textField5);
+                panel4.add(label6);
+                panel4.add(textField6);
+                panel4.add(label6_2);
+                panel4.add(textField6_2);
+                panel4.add(label6_3);
+                panel1.add(panel4);
+                contenedor.add(panel1);
+
+                JLabel label7 = new JLabel("                                                     CIUDADES:                                ");
+                panel6.add(label7);
+                recorrerCiudades();
+                
+                JLabel label8 = new JLabel("                           PARTIDOS:                 ");
+                panel7.add(label8);
+                recorrerPartidos();
+
+                JLabel label9 = new JLabel("                 PROMESAS: ");
+                panel8.add(label9);
+                recorrerPromesas();
+
+
+                panel5.add(panel6);
+                panel5.add(panel7);
+                panel5.add(panel8);
+
+                contenedor.add(panel5);
+
+
+                contenedor.repaint();
+                contenedor.revalidate();
+
+                button3.addActionListener(new ActionListener() {
+
+                            @Override
+                            public void actionPerformed(ActionEvent e) {
+                            ciudadEncontrada = false;
+                            int size = miLista.size();
+                            
+                            for (int j = 0; j < size; j++) { 
+                                Candidato candidato = miLista.get(j);
+                                if(candidato.getCedula().equals(textField12.getText())){
+                                    try{
+                                        if(textField .getText().isEmpty() ||  textField3 .getText().isEmpty()|| textField4 .getText().isEmpty()||
+                                        textField5 .getText().isEmpty()|| textField6 .getText().isEmpty()||textField6_2.getText().isEmpty()){
+                                        throw new UnivalleException("Alguna o todas las casilla estan vacias...");}
+
+                                
+                                        String nombre = textField.getText();
+                                        String ciudad = ""; 
+                            Ciudades lestCiudades[] = Ciudades.values();
+
+                            
+                            //Ciudad
+                            try{
+                            for (int i = 0; i < lestCiudades.length; i++) {
+                                String corrovorarCiudad = lestCiudades[i].toString();
+                                
+                                if(textField3.getText().equals(corrovorarCiudad)){
+                                    ciudad = textField3.getText();
+                                    ciudadEncontrada = true;
+                                    }
+                                                                    
+                                }
+                                if (!ciudadEncontrada) {
+                                    throw new UnivalleException("Error... Favor verificar que el nombre de la ciudad sea igual al de la lista.");
+                                }
+                            }catch(UnivalleException ex){
+                                    String mensaje = ex.getMessage();
+                                    JOptionPane.showMessageDialog(contenedor, mensaje);
+                                    return;
+                                }
+                            
+
+
+                            boolean decision = false ;
+                            try{
+                                if(textField4.getText().equals("derecha") || textField4.getText().equals("izquierda")){
+                                    //bien
+                                }else{
+                                    throw new UnivalleException("Error..verifique que su eleccion sea igual a dercha o izquierda(todo minusculas)");
+                                }
+
+                            }catch(UnivalleException ex){
+                                String mensaje = ex.getMessage();
+                                JOptionPane.showMessageDialog(contenedor, mensaje);return;
+                                }                   
+                            //Derecha o izquierda
+                            if(textField4.getText().equals("derecha")){
+                                decision = true;}else if(textField4.getText().equals("izquierda")){decision=false;}
+                            
+                            PartidosPoliticos partido = PartidosPoliticos.Aico;
+                            PartidosPoliticos partidosPoliticos[] = PartidosPoliticos.values();
+                            //PartidoPolitico
+                            int numPromesa=0;
+                            int numPartido=0;
+                            int numPromesa2=0;
+                            try{
+                                numPartido = Integer.parseInt(textField5.getText());
+                                numPromesa = Integer.parseInt(textField6.getText());
+                                numPromesa2 = Integer.parseInt(textField6_2.getText());
+                                if(1 > numPartido || numPartido > 11 || 1 > numPromesa || numPromesa > 7 ||1 > numPromesa2 || numPromesa2 >7 ){
+                                    throw new UnivalleException("Error, posicion no encontrada en PartidoP o alguna de las promesas");
+                                }
+                                
+                                }catch(NumberFormatException ex){
+                                    JOptionPane.showMessageDialog(contenedor, "Solo se permiten numeros en las casilla de partido y promesas");
+                                    return;
+                                }catch(UnivalleException ex){
+                                    String mensaje = ex.getMessage();
+                                    JOptionPane.showMessageDialog(contenedor,mensaje);
+                                    return;}
+                                for (int w = 0; w < partidosPoliticos.length; w++) {
+                                    if (partidosPoliticos[numPartido-1] == partidosPoliticos[w]) {
+                                        partido = partidosPoliticos[w];
+                                    }
+                                }
+                                //Promesas 1 y 2
+                                Promesas promesa = Promesas.invalide;
+                                Promesas promesa2 = Promesas.invalide;
+                                Promesas lestpromesas[] = Promesas.values();
+                                //Promesa1
+                                
+                                for (int k = 0; k < lestpromesas.length; k++) {
+                                    if (lestpromesas[numPromesa-1] == lestpromesas[k]) {
+                                        promesa = lestpromesas[k];
+                                    }
+                                }
+                                //Promesa2
+                                
+                                for (int k = 0; k < lestpromesas.length; k++) {
+                                    if (lestpromesas[numPromesa2-1] == lestpromesas[k]) {
+                                        promesa2 = lestpromesas[k];
+                                    }
+                                }
+                                Candidato nuevoCandidato = new Candidato(nombre, candidato.getCedula(),ciudad, decision, partido, promesa, promesa2);
+                                
+                                miLista.set(j, nuevoCandidato);
+                                }catch(UnivalleException ex){
+                                    String mensaje = ex.getMessage();
+                                    JOptionPane.showMessageDialog(contenedor, mensaje);
+                                    return;}
+                                }
+                                
+                                }JOptionPane.showMessageDialog(contenedor, "Se a actualizado con exito");
+                            }
+                        
+                            
+                    });
+                    
+            }
+        })
     }
     
 }

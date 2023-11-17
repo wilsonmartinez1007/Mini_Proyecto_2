@@ -499,8 +499,8 @@ public class App extends JFrame {
                                     }
                                 }
                                 //Promesas 1 y 2
-                                Promesas promesa = Promesas.invalide;
-                                Promesas promesa2 = Promesas.invalide;
+                                Promesas promesa = Promesas.Aumento_seguridad;
+                                Promesas promesa2 = Promesas.Aumento_seguridad;
                                 Promesas lestpromesas[] = Promesas.values();
                                 //Promesa1
                                 
